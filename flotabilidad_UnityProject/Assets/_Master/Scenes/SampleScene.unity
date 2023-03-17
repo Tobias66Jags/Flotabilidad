@@ -352,7 +352,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606358469}
-  m_LocalRotation: {x: -0, y: -0.0000000024105693, z: 0.0000000013220663, w: 1}
+  m_LocalRotation: {x: -0, y: 5.8705746e-10, z: -3.219691e-10, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -591,7 +591,7 @@ MonoBehaviour:
   underWaterDrag: 3
   underWaterAngularDrag: 1
   airDrag: 0
-  airAngularDrag: 0
+  airAngularDrag: 10.81
   floatingPower: 10
   waterHeight: 0
 --- !u!1 &963194225
@@ -671,7 +671,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.24820295, y: 0.000000016506045, z: -0.000000004229188, w: 0.9687081}
+  m_LocalRotation: {x: 0.24820295, y: 0.00000001658377, z: -0.0000000042491033, w: 0.9687081}
   m_LocalPosition: {x: 0, y: 9, z: -10.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2457,7 +2457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d4fcd75b4163e4fb08db4e2e586898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 10
   _rotationSpeed: 4
 --- !u!65 &6942971693608515491
 BoxCollider:
