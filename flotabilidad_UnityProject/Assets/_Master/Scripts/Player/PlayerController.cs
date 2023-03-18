@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-   Rigidbody rb;
+    Rigidbody rb;
 
     [Header("Player Values")]
     [SerializeField] private float _speed=3;
@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     private float _angleRotate;
 
     private float movement;
-   
-
+  
   
 
 
@@ -26,9 +25,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-      // rb.velocity += Vector3.forward*NewMovement()*_speed;  
         rb.AddForce(transform.forward * NewMovement() * _speed);
         rb.AddTorque(0, NewRotation(), 0);     
     }
