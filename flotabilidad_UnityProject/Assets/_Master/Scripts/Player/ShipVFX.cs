@@ -9,7 +9,7 @@ public class ShipVFX : MonoBehaviour
     public List<GameObject> sails;
 
     [SerializeField] ParticleSystem _hurtParticle;
-
+    [SerializeField] private float _velocity=2;
     private void Start()
     {
         rb = playerController.GetComponent<Rigidbody>();
@@ -25,7 +25,7 @@ public class ShipVFX : MonoBehaviour
 
     private void SailEffect()
     {      
-        if (rb.velocity.magnitude > 1)
+        if (rb.velocity.magnitude > _velocity)
         {
             Debug.Log("si");
             foreach (var sail in sails)

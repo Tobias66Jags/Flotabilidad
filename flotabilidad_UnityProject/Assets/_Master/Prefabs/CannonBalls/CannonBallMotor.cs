@@ -9,19 +9,36 @@ public class CannonBallMotor : MonoBehaviour
     [SerializeField] private float _explosionForce;
     [SerializeField] private float _explosionRadius;
 
+    private float _timer;
+
+    public float maxTime;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
     private void Update()
     {
-        rb.AddForce(transform.forward * _speed,ForceMode.Impulse);
+        _timer += Time.deltaTime;
+        
+        if (_timer>=maxTime)
+        {
+            _timer = 0;
+            rb.velocity = Vector3.zero;
+            this.gameObject.SetActive(false);
+
+        }
+        transform.position += transform.forward * _speed*Time.deltaTime;
+     
+
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject)
         {
-            rb.AddExplosionForce(_explosionForce, Vector3.forward, _explosionRadius);
+            rb.velocity = Vector3.zero;
+            
             this.gameObject.SetActive(false);
         }
        
