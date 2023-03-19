@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class ShipVFX : MonoBehaviour
 {
-    Rigidbody rb;
-    public PlayerController playerController;
+    public Rigidbody rb;
+    public Health health;  
     public List<GameObject> sails;
-
-    [SerializeField] ParticleSystem _hurtParticle;
+    public GameObject[] damageParticles = new GameObject[3]; 
     [SerializeField] private float _velocity=2;
-    private void Start()
-    {
-        rb = playerController.GetComponent<Rigidbody>();
-        
-    }
+   
     private void Update()
     {
         SailEffect();
-
-       
+        HurtEffects();
     }
 
 
@@ -27,7 +21,6 @@ public class ShipVFX : MonoBehaviour
     {      
         if (rb.velocity.magnitude > _velocity)
         {
-            Debug.Log("si");
             foreach (var sail in sails)
             {
                 sail.transform.localScale = new Vector3(1, 1, 1);
@@ -39,6 +32,40 @@ public class ShipVFX : MonoBehaviour
             {
                 sail.transform.localScale = new Vector3(1, 0.2f, 1);
             }
+        }
+    }
+    private void HurtEffects()
+    {
+     
+        if (health.maxHealth<=70)
+        {
+            damageParticles[0].SetActive(true);
+        }
+        else
+        {
+            damageParticles[0].SetActive(false);
+        }
+        
+        if (health.maxHealth<=40)
+        {
+            damageParticles[0].SetActive(false);
+            damageParticles[1].SetActive(true);
+          //  damageParticles[2].SetActive(false);
+        }
+
+        else
+        {
+            damageParticles[1].SetActive(false);
+        }
+        if (health.maxHealth<=20)
+        {
+           // damageParticles[0].SetActive(false);
+         //   damageParticles[1].SetActive(false);
+            damageParticles[2].SetActive(true);
+        }
+        else
+        {
+            damageParticles[2].SetActive(false);
         }
     }
 

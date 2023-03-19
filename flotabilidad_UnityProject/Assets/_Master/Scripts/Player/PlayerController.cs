@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Shoot Values")]
     [SerializeField] private float _camRotationValue = 60;
+    [SerializeField] private float _timeBetweenShoots = 2;
+    [SerializeField] private float _currentTime = 0;
     [SerializeField] private Transform _leftReference;
     [SerializeField] private Transform _rightReference;
     [SerializeField] private CinemachineVirtualCamera vCam;
@@ -47,17 +49,19 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+         _currentTime += Time.deltaTime;
         var body = vCam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
         if (Input.GetButtonDown("Fire1")&& body.m_XAxis.Value<=-_camRotationValue)
         {
             StartCoroutine(shoot.ShootBall(_leftReference));
             rb.AddForce(new Vector3(1,2,0) * _knockBackForce);
+            _currentTime = 0;
         }
         else if (Input.GetButtonDown("Fire1") && body.m_XAxis.Value >= _camRotationValue)
         {
             StartCoroutine(shoot.ShootBall(_rightReference));
             rb.AddForce(new Vector3(-1,2,0)*_knockBackForce);
-
+            _currentTime = 0;
         }
     }
 
