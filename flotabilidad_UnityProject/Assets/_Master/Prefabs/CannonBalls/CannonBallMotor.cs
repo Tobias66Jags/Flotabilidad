@@ -37,10 +37,24 @@ public class CannonBallMotor : MonoBehaviour
     {
         if (collision.gameObject)
         {
-            rb.velocity = Vector3.zero;
-            
+            Explosion();
+            rb.velocity = Vector3.zero;   
             this.gameObject.SetActive(false);
         }
        
     }
+
+    void Explosion()
+    {
+        Collider[] _colliders = Physics.OverlapSphere(transform.position, _explosionRadius);
+        foreach (Collider target in _colliders)
+        {
+            Rigidbody rb = target.GetComponent<Rigidbody>();
+            if (rb!=null)
+            {
+                rb.AddExplosionForce(_explosionForce, transform.position, _explosionRadius); 
+            }
+        }
+    }
+   
 }
