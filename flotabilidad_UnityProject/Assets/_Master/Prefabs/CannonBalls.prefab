@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 20
-  _explosionForce: 100
+  _explosionForce: 200
   _explosionRadius: 10
   maxTime: 2
 --- !u!65 &8879144879326013713
