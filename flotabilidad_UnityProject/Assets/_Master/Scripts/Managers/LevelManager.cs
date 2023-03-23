@@ -9,4 +9,12 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene(toLevel);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ChangeLevel("SampleScene");
+        }
+    }
 }
