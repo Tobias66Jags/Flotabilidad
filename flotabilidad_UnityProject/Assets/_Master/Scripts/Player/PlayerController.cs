@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
     public ShootManager shoot;
-
+    public Health health;
 
     Rigidbody rb;
 
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _leftReference;
     [SerializeField] private Transform _rightReference;
     [SerializeField] private CinemachineVirtualCamera vCam;
+    [SerializeField] private GameObject _shootIndicator;
 
     [Header("Physic Values")]
     [SerializeField] private float _knockBackForce=10;
@@ -30,15 +32,13 @@ public class PlayerController : MonoBehaviour
     private float _angleRotate;
 
     private float _movement;
-    
-  
 
+    [Header("Death")]
+    public UnityEvent onDeath;
 
 
     void Start()
-    {
-       
- 
+    { 
         rb = GetComponent<Rigidbody>();  
     }
 
@@ -52,6 +52,11 @@ public class PlayerController : MonoBehaviour
     {
          _currentTime += Time.deltaTime;
         var body = vCam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+        if (body.m_XAxis.Value<=-_camRotationValue || body.m_XAxis.Value>=_camRotationValue)
+        {
+            _shootIndicator.SetActive(true);
+        }
+        else { _shootIndicator.SetActive(false); }
         if (Input.GetButtonDown("Fire1")&& body.m_XAxis.Value<=-_camRotationValue&& _currentTime>= _timeBetweenShoots)
         {
             StartCoroutine(shoot.ShootBall(_leftReference));
@@ -63,6 +68,11 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(shoot.ShootBall(_rightReference));
             rb.AddForce(new Vector3(-1,2,0)*_knockBackForce);
             _currentTime = 0;
+        }
+        if (health.maxHealth<=0)
+        {
+            onDeath.Invoke();
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
